@@ -83,6 +83,7 @@ namespace Connect4
             button.Width = 40;
             button.Height = 40;
             button.Content = "here";
+
             int rows = 7;
             int cols = 7;
             int cellSize = 50;
@@ -97,15 +98,18 @@ namespace Connect4
             grid.Margin = new Thickness(5);
 
             TextBlock t = new TextBlock();
+           
             //Create 7x7 grid
             for (int i = 0; i < 7; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition());
-                Grid.SetRow(button, i);
+                //Grid.SetRow(button, i);
                 for (int j = 0; j < 7; j++)
                 {
-                    Grid.SetColumn(button, 0);
+                    grid.SetValue(Grid.RowProperty, j);
+                    grid.Children.Add(button);
                 }
+                grid.SetValue(Grid.ColumnProperty, i); 
             }
 
             for (int i = 0; i < 7; i++)
