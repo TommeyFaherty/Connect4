@@ -30,6 +30,7 @@ namespace Connect4
         int getCol = 0;
         int getRow = 0;
         int winner = 0;
+        int playerCorrector = 0;
         int[,] gameGrid = new int[7, 7] {
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
@@ -75,6 +76,7 @@ namespace Connect4
                 Grid.SetColumn(chosenColour, 0);
                 Grid.SetColumn(next, 1);
                 turnCounter = 0;
+                playerCorrector = 0;
             }
 
             else if (buttonid == "RadioButton2")
@@ -86,6 +88,7 @@ namespace Connect4
                 Grid.SetColumn(chosenColour, 0);
                 Grid.SetColumn(next, 1);
                 turnCounter = 1;
+                playerCorrector = -1;
             }
 
             //button starts game
@@ -185,11 +188,10 @@ namespace Connect4
                 chip.HorizontalAlignment = HorizontalAlignment.Center;
                 chip.VerticalAlignment = VerticalAlignment.Center;
 
-                turnCounter++;
-
                 Grid.SetColumn(chip, getCol);
                 Grid.SetRow(chip, getRow);
                 grid.Children.Add(chip);
+
             }
 
             void ButtonClick(object sender1, RoutedEventArgs e1)
@@ -249,7 +251,17 @@ namespace Connect4
                             getRow = row;
                             CreateEllipse();
                             foundRow = 1;
-                            gameGrid[row, getCol] = 1;
+                            if (turnCounter % 2 == 0)
+                            {
+                                gameGrid[row, getCol] = 1;
+                            }
+                            else
+                            {
+                                gameGrid[row, getCol] = 2;
+                            }
+
+                            checkStatus();
+                            turnCounter++;
                             break;
                         case 1:
                             break;
@@ -269,10 +281,11 @@ namespace Connect4
                         break;
 
                 }
+
             }
         }//Start Game
 
-        private void checkBoard()
+        private void checkStatus()
         {
             int player = 0;
 
@@ -285,9 +298,9 @@ namespace Connect4
                 player = 2;
             }
 
-            for (int i = 7; i > 0; i--)
+            for (int i = 6; i >= 3; i--)
             {
-                for (int j = 7; j > 0; j--)
+                for (int j = 6; j >= 3; j--)
                 {
                     //Offset(-1,-1) Up and Right
                     if (gameGrid[i, j] == player &&
@@ -297,7 +310,13 @@ namespace Connect4
                     {
                         winner = player;
                     }
+                }
+            }
 
+            for (int i = 6; i >= 0; i--)
+            {
+                for (int j = 6; j >= 3; j--)
+                {
                     //Offset(0,1) Horizontal 
                     if (gameGrid[i, j] == player &&
                         gameGrid[i, j - 1] == player &&
@@ -306,7 +325,13 @@ namespace Connect4
                     {
                         winner = player;
                     }
+                }
+            }
 
+            for (int i = 3; i >= 0; i--)
+            {
+                for (int j = 6; j >= 3; j--)
+                {
                     //Offset(1,-1) Down and Left
                     if (gameGrid[i, j] == player &&
                         gameGrid[i + 1, j - 1] == player &&
@@ -315,7 +340,13 @@ namespace Connect4
                     {
                         winner = player;
                     }
+                }
+            }
 
+            for (int i = 3; i >= 0; i--)
+            {
+                for (int j = 6; j >= 0; j--)
+                {
                     //Offset(1,0) Vertical
                     if (gameGrid[i, j] == player &&
                         gameGrid[i + 1, j] == player &&
@@ -325,7 +356,8 @@ namespace Connect4
                         winner = player;
                     }
                 }
-            }//Outer for loop
+            }
+
 
             if (winner > 0)
             {
@@ -335,15 +367,20 @@ namespace Connect4
 
         private void GameWinner()
         {
+            //Clear StackPanel
+            ChooseColour.Children.Clear();
 
-            if (winner == 1)
+            TextBox displayWinner = new TextBox();
+
+            if (winner + playerCorrector == 1)
             {
-
+                displayWinner.Text = "Player One is the Winner!";
             }
             else
             {
-
+                displayWinner.Text = "Player Two is the Winner!";
             }
+            ChooseColour.Children.Add(displayWinner);
         }
 
     }
