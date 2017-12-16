@@ -24336,11 +24336,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tommey\\source\\repos\\Connect4\\Connect4\\Connect4.csproj",
+      "projectUniqueName": "C:\\Users\\Tommey\\Documents\\GitHub\\Connect4\\Connect4\\Connect4.csproj",
       "projectName": "Connect4",
-      "projectPath": "C:\\Users\\Tommey\\source\\repos\\Connect4\\Connect4\\Connect4.csproj",
+      "projectPath": "C:\\Users\\Tommey\\Documents\\GitHub\\Connect4\\Connect4\\Connect4.csproj",
       "packagesPath": "C:\\Users\\Tommey\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tommey\\source\\repos\\Connect4\\Connect4\\obj\\",
+      "outputPath": "C:\\Users\\Tommey\\Documents\\GitHub\\Connect4\\Connect4\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [

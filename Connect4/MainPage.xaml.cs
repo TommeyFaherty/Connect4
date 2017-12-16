@@ -29,7 +29,8 @@ namespace Connect4
         int colCounter = 0;
         int getCol = 0;
         int getRow = 0;
-        int[,] full = new int[7, 7] {
+        int winner = 0;
+        int[,] gameGrid = new int[7, 7] {
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
@@ -148,7 +149,7 @@ namespace Connect4
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    
+
                     Button button = new Button();
                     button.Content = i.ToString();
                     button.Name = j.ToString();
@@ -157,7 +158,7 @@ namespace Connect4
                     button.Width = cellSize - 4;
                     button.Background = new SolidColorBrush(Colors.White);
                     button.Click += ButtonClick;
-                    
+
                     Grid.SetColumn(button, j);
                     Grid.SetRow(button, i);
                     grid.Children.Add(button);
@@ -186,7 +187,7 @@ namespace Connect4
 
                 turnCounter++;
 
-                Grid.SetColumn(chip,getCol);
+                Grid.SetColumn(chip, getCol);
                 Grid.SetRow(chip, getRow);
                 grid.Children.Add(chip);
             }
@@ -236,44 +237,114 @@ namespace Connect4
                 }
 
                 btn.Content = getCol;
-                 
+
                 //Chip placement
                 int foundRow = 0;
                 for (int row = 6; row > -1; row--)
                 {
-                    switch (full[row, getCol])
+                    switch (gameGrid[row, getCol])
                     {
                         case 0:
-                        Ellipse chip = new Ellipse();
-                        CreateEllipse();
-                        getRow = row;
-                        foundRow = 1;
+                            Ellipse chip = new Ellipse();
+                            getRow = row;
+                            CreateEllipse();
+                            foundRow = 1;
+                            gameGrid[row, getCol] = 1;
                             break;
                         case 1:
                             break;
                     }
 
-                    while(row == 0)
+                    while (row == 0)
                     {
-                    if(full[row,getCol] == 1)
-                    {
-                        string message = "This Collumn is full";
-                        // var result = MessageBox.Show(message);
-                        turnCounter--;
-                    }
+                        if (gameGrid[row, getCol] == 1)
+                        {
+                            string message = "This Collumn is full";
+                            // var result = MessageBox.Show(message);
+                            turnCounter--;
+                        }
                     }
 
-                    if(foundRow == 1)
-                    break;
-                    
+                    if (foundRow == 1)
+                        break;
+
                 }
-
-                //chipHolder.Children.Add(chip);
-
-
             }
         }//Start Game
 
+        private void checkBoard()
+        {
+            int player = 0;
+
+            if (turnCounter % 2 == 0)
+            {
+                player = 1;
+            }
+            else
+            {
+                player = 2;
+            }
+
+            for (int i = 7; i > 0; i--)
+            {
+                for (int j = 7; j > 0; j--)
+                {
+                    //Offset(-1,-1) Up and Right
+                    if (gameGrid[i, j] == player &&
+                        gameGrid[i - 1, j - 1] == player &&
+                        gameGrid[i - 2, j - 2] == player &&
+                        gameGrid[i - 3, j - 3] == player)
+                    {
+                        winner = player;
+                    }
+
+                    //Offset(0,1) Horizontal 
+                    if (gameGrid[i, j] == player &&
+                        gameGrid[i, j - 1] == player &&
+                        gameGrid[i, j - 2] == player &&
+                        gameGrid[i, j - 3] == player)
+                    {
+                        winner = player;
+                    }
+
+                    //Offset(1,-1) Down and Left
+                    if (gameGrid[i, j] == player &&
+                        gameGrid[i + 1, j - 1] == player &&
+                        gameGrid[i + 2, j - 2] == player &&
+                        gameGrid[i + 3, j - 3] == player)
+                    {
+                        winner = player;
+                    }
+
+                    //Offset(1,0) Vertical
+                    if (gameGrid[i, j] == player &&
+                        gameGrid[i + 1, j] == player &&
+                        gameGrid[i + 2, j] == player &&
+                        gameGrid[i + 3, j] == player)
+                    {
+                        winner = player;
+                    }
+                }
+            }//Outer for loop
+
+            if (winner > 0)
+            {
+                GameWinner();
+            }
+        }//CheckBoard
+
+        private void GameWinner()
+        {
+
+            if (winner == 1)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
 
     }
 }
