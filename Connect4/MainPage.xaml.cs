@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -99,6 +100,7 @@ namespace Connect4
         {
             //Clear StackPanel
             ChooseColour.Children.Clear();
+            ChooseColour.Background = new SolidColorBrush(Colors.Gray);
 
             Grid grid = new Grid();
             //Variables
@@ -154,7 +156,7 @@ namespace Connect4
                 {
 
                     Button button = new Button();
-                    button.Content = i.ToString();
+                    button.Content = "";
                     button.Name = j.ToString();
                     button.Tag = j;
                     button.Height = cellSize - 4;
@@ -202,6 +204,7 @@ namespace Connect4
 
                 //sender as button
                 Button btn = (Button)sender1;
+                btn.Content = "";
 
                 //Stackpanel to hold ellipse
                 StackPanel chipHolder = new StackPanel();
@@ -237,8 +240,6 @@ namespace Connect4
                         getCol = 6;
                         break;
                 }
-
-                btn.Content = getCol;
 
                 //Chip placement
                 int foundRow = 0;
@@ -371,6 +372,8 @@ namespace Connect4
             ChooseColour.Children.Clear();
 
             TextBox displayWinner = new TextBox();
+            displayWinner.FontSize = 30;
+            displayWinner.HorizontalAlignment = HorizontalAlignment.Center;
 
             if (winner + playerCorrector == 1)
             {
@@ -381,7 +384,73 @@ namespace Connect4
                 displayWinner.Text = "Player Two is the Winner!";
             }
             ChooseColour.Children.Add(displayWinner);
+
+            Button restart = new Button();
+            Button endGame = new Button();
+            StackPanel buttonHolder = new StackPanel();
+
+            buttonHolder.Orientation = Orientation.Horizontal;
+            buttonHolder.HorizontalAlignment = HorizontalAlignment.Center;
+            restart.Content = "Restart";
+            restart.HorizontalAlignment = HorizontalAlignment.Center;
+            endGame.Content = "endGame";
+            endGame.HorizontalAlignment = HorizontalAlignment.Center;
+
+            ChooseColour.Children.Add(buttonHolder);
+            buttonHolder.Children.Add(restart);
+            buttonHolder.Children.Add(endGame);
+
+            restart.Click += Restart_Click;
+            endGame.Click += endGame_Click;
+
         }
 
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
+            restartGame();
+        }
+
+        private void restartGame()
+        {
+            ChooseColour.Children.Clear();
+            TextBox t = new TextBox();
+            t.Text = "Choose a colour.";
+            t.FontSize = 30;
+            t.HorizontalAlignment = HorizontalAlignment.Center;
+
+            ChooseColour.Children.Add(Title);
+            ChooseColour.Children.Add(t);
+            ChooseColour.Children.Add(chooseChip);
+            ChooseColour.Children.Add(Radiobtn);
+            ChooseColour.Children.Add(selectedColour);
+
+            //Reset Variables
+            turnCounter = 0;
+            colCounter = 0;
+            getCol = 0;
+            getRow = 0;
+            winner = 0;
+            playerCorrector = 0;
+            gameGrid = new int[7, 7] {
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0}
+            };
+        }
+
+        private void endGame_Click(object sender, RoutedEventArgs e)
+        {
+            ChooseColour.Children.Clear();
+            TextBox t = new TextBox();
+            t.Text = "Thanks for Playing";
+            t.FontSize = 30;
+            t.HorizontalAlignment = HorizontalAlignment.Center;
+            ChooseColour.Children.Add(t);
+
+        }
     }
 }
