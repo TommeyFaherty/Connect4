@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using System.Windows.Input;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -26,11 +27,13 @@ namespace Connect4
     public sealed partial class MainPage : Page
     {
         //Public Variables
+        string p1 = "", p2 = "";
         int turnCounter = 0;
         int colCounter = 0;
         int getCol = 0;
         int getRow = 0;
         int winner = 0;
+        int checkRed = 0;
         int playerCorrector = 0;
         int[,] gameGrid = new int[7, 7] {
                 {0,0,0,0,0,0,0},
@@ -40,7 +43,9 @@ namespace Connect4
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0}
-            };
+        };
+        ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
 
         public MainPage()
         {
@@ -54,23 +59,59 @@ namespace Connect4
 
         private void createGame()
         {
+            //Local Settings
+            ApplicationDataContainer container = localSettings.CreateContainer("Names", ApplicationDataCreateDisposition.Always);
+            object p1obj;
+            object p2obj;
+            string p1Default;
+            string p2Default;
+
+            p1obj = localSettings.Containers["Names"].Values["P1"];
+            p2obj = localSettings.Containers["Names"].Values["P2"];
+            p1Default = (string)p1obj;
+            p2Default = (string)p2obj;
+
+            if (p2Default == null)
+                P2.Text = "Player 2";
+            else
+                P2.Text = p2Default;
+
+            if (p1Default == null)
+                P1.Text = "Player 1";
+            else
+                P1.Text = p1Default;
 
         }//end createGame
-
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             RadioButton radioButton = sender as RadioButton;
             String buttonid = radioButton.Name;
-
             TextBlock chosenColour = new TextBlock();
-
             Button next = new Button();
-            next.Content = "Next";
+
+            next.Content = "Begin Match!";
 
             if (buttonid == "RadioButton1")
             {
+                checkRed = 1;
+                selectedColour.Background = new SolidColorBrush(Colors.Red);
+                P1Color.Background = new SolidColorBrush(Colors.Red);
+                P2Color.Background = new SolidColorBrush(Colors.Yellow);
+                playerNames.Background = new SolidColorBrush(Colors.Black);
+                MainPanel.Background = new SolidColorBrush(Colors.Black);
+                Radiobtn.Background = new SolidColorBrush(Colors.Yellow);
+                title.Foreground = new SolidColorBrush(Colors.White);
+                choiceText.Foreground = new SolidColorBrush(Colors.White);
+                next.Foreground = new SolidColorBrush(Colors.White);
+                playerNames.Background = new SolidColorBrush(Colors.Black);
+                MainPanel.Background = new SolidColorBrush(Colors.Black);
+                Radiobtn.Background = new SolidColorBrush(Colors.Yellow);
+                title.Foreground = new SolidColorBrush(Colors.White);
+                choiceText.Foreground = new SolidColorBrush(Colors.White);
+                next.Background = new SolidColorBrush(Colors.Maroon);
                 chosenColour.Text = "Player 1 is Red";
+                chosenColour.VerticalAlignment = VerticalAlignment.Center;
                 selectedColour.Children.Clear();
                 selectedColour.Children.Add(chosenColour);
                 selectedColour.Children.Add(next);
@@ -82,7 +123,24 @@ namespace Connect4
 
             else if (buttonid == "RadioButton2")
             {
+                checkRed = 0;
+                selectedColour.Background = new SolidColorBrush(Colors.Yellow);
+                P1Color.Background = new SolidColorBrush(Colors.Yellow);
+                P2Color.Background = new SolidColorBrush(Colors.Red);
+                playerNames.Background = new SolidColorBrush(Colors.Black);
+                MainPanel.Background = new SolidColorBrush(Colors.Black);
+                Radiobtn.Background = new SolidColorBrush(Colors.Red);
+                title.Foreground = new SolidColorBrush(Colors.White);
+                choiceText.Foreground = new SolidColorBrush(Colors.White);
+                next.Foreground = new SolidColorBrush(Colors.White);
+                playerNames.Background = new SolidColorBrush(Colors.Black);
+                MainPanel.Background = new SolidColorBrush(Colors.Black);
+                Radiobtn.Background = new SolidColorBrush(Colors.Red);
+                title.Foreground = new SolidColorBrush(Colors.White);
+                choiceText.Foreground = new SolidColorBrush(Colors.White);
+                next.Background = new SolidColorBrush(Colors.DarkOrange);
                 chosenColour.Text = "Player 1 is Yellow";
+                chosenColour.VerticalAlignment = VerticalAlignment.Center;
                 selectedColour.Children.Clear();
                 selectedColour.Children.Add(chosenColour);
                 selectedColour.Children.Add(next);
@@ -92,18 +150,32 @@ namespace Connect4
                 playerCorrector = -1;
             }
 
-            //button starts game
             next.Click += StartGame;
         }
 
         void StartGame(object sender, RoutedEventArgs e)
         {
-            //Clear StackPanel
-            ChooseColour.Children.Clear();
-            ChooseColour.Background = new SolidColorBrush(Colors.Gray);
+            //Default Names
+            if (P1.Text == "")
+                P1.Text = "Player1";
+
+            if (P2.Text == "")
+                P2.Text = "Player2";
+
+            //Remember Names
+            ApplicationDataContainer container = localSettings.CreateContainer("Names", ApplicationDataCreateDisposition.Always);
+            p1 = P1.Text;
+            p2 = P2.Text;
+
+            localSettings.Containers["Names"].Values["P1"] = p1;
+            localSettings.Containers["Names"].Values["P2"] = p2;
+
+            //Clear Main StackPanel
+            MainPanel.Children.Clear();
+            MainPanel.Background = new SolidColorBrush(Colors.Gray);
 
             Grid grid = new Grid();
-            //Variables
+            //Variables for grid
             int rows = 7;
             int cols = 7;
             int cellSize = 50;
@@ -113,7 +185,7 @@ namespace Connect4
             grid.VerticalAlignment = VerticalAlignment.Center;
             grid.Width = cols * cellSize;
             grid.Height = rows * cellSize;
-            grid.Background = new SolidColorBrush(Colors.Black);
+            grid.Background = new SolidColorBrush(Colors.White);
             grid.Margin = new Thickness(5);
 
             //Create 7x7 grid
@@ -128,7 +200,7 @@ namespace Connect4
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            ChooseColour.Children.Add(grid);
+            MainPanel.Children.Add(grid);
 
             //Border
             Border border;
@@ -144,7 +216,7 @@ namespace Connect4
                     border.VerticalAlignment = VerticalAlignment.Center;
                     border.SetValue(Grid.RowProperty, row);
                     border.SetValue(Grid.ColumnProperty, col);
-                    border.Background = new SolidColorBrush(Colors.White);
+                    border.Background = new SolidColorBrush(Colors.Black);
                     grid.Children.Add(border);
                 }
             }
@@ -161,7 +233,7 @@ namespace Connect4
                     button.Tag = j;
                     button.Height = cellSize - 4;
                     button.Width = cellSize - 4;
-                    button.Background = new SolidColorBrush(Colors.White);
+                    // button.Background = new SolidColorBrush(Colors.White);
                     button.Click += ButtonClick;
 
                     Grid.SetColumn(button, j);
@@ -185,6 +257,7 @@ namespace Connect4
                     chip.Fill = new SolidColorBrush(Colors.Yellow);
                 }
 
+                //Chip details
                 chip.Width = 30;
                 chip.Height = 30;
                 chip.HorizontalAlignment = HorizontalAlignment.Center;
@@ -272,8 +345,6 @@ namespace Connect4
                     {
                         if (gameGrid[row, getCol] == 1)
                         {
-                            string message = "This Collumn is full";
-                            // var result = MessageBox.Show(message);
                             turnCounter--;
                         }
                     }
@@ -369,26 +440,44 @@ namespace Connect4
         private void GameWinner()
         {
             //Clear StackPanel
-            ChooseColour.Children.Clear();
-
-            TextBox displayWinner = new TextBox();
-            displayWinner.FontSize = 30;
-            displayWinner.HorizontalAlignment = HorizontalAlignment.Center;
-
-            if (winner + playerCorrector == 1)
-            {
-                displayWinner.Text = "Player One is the Winner!";
-            }
-            else
-            {
-                displayWinner.Text = "Player Two is the Winner!";
-            }
-            ChooseColour.Children.Add(displayWinner);
+            MainPanel.Children.Clear();
 
             Button restart = new Button();
             Button endGame = new Button();
+            StackPanel DisplayChamp = new StackPanel();
             StackPanel buttonHolder = new StackPanel();
+            TextBlock displayWinner = new TextBlock();
+            displayWinner.FontSize = 30;
+            displayWinner.FontWeight = FontWeight;
+            displayWinner.HorizontalAlignment = HorizontalAlignment.Center;
+            DisplayChamp.Background = new SolidColorBrush(Colors.Silver);
 
+            if (checkRed == 1)
+            {
+                displayWinner.Foreground = new SolidColorBrush(Colors.Maroon);
+                restart.Background = new SolidColorBrush(Colors.Red);
+                endGame.Background = new SolidColorBrush(Colors.Red);
+                buttonHolder.Background = new SolidColorBrush(Colors.Maroon);
+            }
+            else
+            {
+                displayWinner.Foreground = new SolidColorBrush(Colors.Yellow);
+                restart.Background = new SolidColorBrush(Colors.Yellow);
+                endGame.Background = new SolidColorBrush(Colors.Yellow);
+                buttonHolder.Background = new SolidColorBrush(Colors.DarkOrange);
+            }
+
+
+            if (winner + playerCorrector == 1)
+            {
+                displayWinner.Text = "P1: " + p1 + " is the Winner!";
+            }
+            else
+            {
+                displayWinner.Text = "P2: " + p2 + " is the Winner!";
+            }
+
+            DisplayChamp.Margin = new Thickness(10, 50, 10, 50);
             buttonHolder.Orientation = Orientation.Horizontal;
             buttonHolder.HorizontalAlignment = HorizontalAlignment.Center;
             restart.Content = "Restart";
@@ -396,12 +485,16 @@ namespace Connect4
             endGame.Content = "endGame";
             endGame.HorizontalAlignment = HorizontalAlignment.Center;
 
-            ChooseColour.Children.Add(buttonHolder);
+            DisplayChamp.Children.Add(displayWinner);
+            MainPanel.Children.Add(DisplayChamp);
+
             buttonHolder.Children.Add(restart);
             buttonHolder.Children.Add(endGame);
+            MainPanel.Children.Add(buttonHolder);
 
             restart.Click += Restart_Click;
             endGame.Click += endGame_Click;
+
 
         }
 
@@ -412,17 +505,17 @@ namespace Connect4
 
         private void restartGame()
         {
-            ChooseColour.Children.Clear();
-            TextBox t = new TextBox();
+            MainPanel.Children.Clear();
+            TextBlock t = new TextBlock();
             t.Text = "Choose a colour.";
             t.FontSize = 30;
             t.HorizontalAlignment = HorizontalAlignment.Center;
 
-            ChooseColour.Children.Add(Title);
-            ChooseColour.Children.Add(t);
-            ChooseColour.Children.Add(chooseChip);
-            ChooseColour.Children.Add(Radiobtn);
-            ChooseColour.Children.Add(selectedColour);
+            MainPanel.Children.Add(Title);
+            MainPanel.Children.Add(t);
+            MainPanel.Children.Add(chooseChip);
+            MainPanel.Children.Add(Radiobtn);
+            MainPanel.Children.Add(selectedColour);
 
             //Reset Variables
             turnCounter = 0;
@@ -444,12 +537,13 @@ namespace Connect4
 
         private void endGame_Click(object sender, RoutedEventArgs e)
         {
-            ChooseColour.Children.Clear();
-            TextBox t = new TextBox();
+            MainPanel.Children.Clear();
+            TextBlock t = new TextBlock();
+            t.Margin = new Thickness(10, 50, 10, 50);
             t.Text = "Thanks for Playing";
             t.FontSize = 30;
             t.HorizontalAlignment = HorizontalAlignment.Center;
-            ChooseColour.Children.Add(t);
+            MainPanel.Children.Add(t);
 
         }
     }

@@ -7,20 +7,35 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel x:Name="ChooseColour" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <StackPanel x:Name="MainPanel" Background="Gray">
 
-        <TextBlock Text="Choose a colour." FontSize="30" HorizontalAlignment="Center"/>
+        <StackPanel x:Name="Title" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <TextBlock x:Name="title" Text="Connect 4" FontSize="50" FontFamily="verdana"></TextBlock>
+        </StackPanel>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel x:Name="playerNames" Orientation="Vertical" VerticalAlignment ="Center" Background="White" Width=" 300" Margin=" 10,0,10,10">
+            <StackPanel x:Name ="P1Color" Orientation="Horizontal" HorizontalAlignment ="Center" Margin="2,2,2,2">
+                <TextBlock Text="Player One enter name: "  VerticalAlignment="Center"/>
+                <TextBox x:Name="P1" Width="110"></TextBox>
+            </StackPanel>
+
+            <StackPanel x:Name="P2Color" Orientation="Horizontal" HorizontalAlignment ="Center">
+                <TextBlock Text="Player Two enter name: " VerticalAlignment="Center"/>
+                <TextBox x:Name="P2" Height="21" Width="110" Margin="2,2,2,2"/>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock x:Name="choiceText" Text="Choose a colour." FontSize="30" HorizontalAlignment="Center"/>
+
+        <StackPanel x:Name ="chooseChip" Orientation="Horizontal" HorizontalAlignment="Center">
             <Ellipse x:Name="RedChp" Fill="Red" Width="100" Height="100" Margin="10" VerticalAlignment="Center"/>
             <Ellipse x:Name="YelChp" Fill="Yellow" Width="100" Height="100" Margin="10" VerticalAlignment="Center"/>
         </StackPanel>
 
-        <StackPanel Name="Radiobtn" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Name="Radiobtn" Orientation="Horizontal" HorizontalAlignment="Center" Background="White">
 
             <RadioButton Name="RadioButton1"  Content="Red" Tag="0" Margin="4" Checked="RadioButton_Checked"/>
             <RadioButton Name="RadioButton2" Content="Yellow" Tag="1" Margin="4" Checked="RadioButton_Checked"/>
-
         </StackPanel>
 
         <Grid Name="selectedColour" HorizontalAlignment="Center">
