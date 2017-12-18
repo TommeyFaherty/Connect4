@@ -175,6 +175,7 @@ namespace Connect4
             MainPanel.Background = new SolidColorBrush(Colors.Gray);
 
             Grid grid = new Grid();
+            grid.Margin = new Thickness(0, 50, 0, 0);
             //Variables for grid
             int rows = 7;
             int cols = 7;
@@ -452,29 +453,41 @@ namespace Connect4
             displayWinner.HorizontalAlignment = HorizontalAlignment.Center;
             DisplayChamp.Background = new SolidColorBrush(Colors.Silver);
 
-            if (checkRed == 1)
-            {
-                displayWinner.Foreground = new SolidColorBrush(Colors.Maroon);
-                restart.Background = new SolidColorBrush(Colors.Red);
-                endGame.Background = new SolidColorBrush(Colors.Red);
-                buttonHolder.Background = new SolidColorBrush(Colors.Maroon);
-            }
-            else
-            {
-                displayWinner.Foreground = new SolidColorBrush(Colors.Yellow);
-                restart.Background = new SolidColorBrush(Colors.Yellow);
-                endGame.Background = new SolidColorBrush(Colors.Yellow);
-                buttonHolder.Background = new SolidColorBrush(Colors.DarkOrange);
-            }
-
-
             if (winner + playerCorrector == 1)
             {
                 displayWinner.Text = "P1: " + p1 + " is the Winner!";
+                if (checkRed == 1)
+                {
+                    displayWinner.Foreground = new SolidColorBrush(Colors.Maroon);
+                    restart.Background = new SolidColorBrush(Colors.Red);
+                    endGame.Background = new SolidColorBrush(Colors.Red);
+                    buttonHolder.Background = new SolidColorBrush(Colors.Maroon);
+                }
+                else
+                {
+                    displayWinner.Foreground = new SolidColorBrush(Colors.Yellow);
+                    restart.Background = new SolidColorBrush(Colors.Yellow);
+                    endGame.Background = new SolidColorBrush(Colors.Yellow);
+                    buttonHolder.Background = new SolidColorBrush(Colors.DarkOrange);
+                }
             }
             else
             {
                 displayWinner.Text = "P2: " + p2 + " is the Winner!";
+                if (checkRed == 1)
+                {
+                    displayWinner.Foreground = new SolidColorBrush(Colors.Yellow);
+                    restart.Background = new SolidColorBrush(Colors.Yellow);
+                    endGame.Background = new SolidColorBrush(Colors.Yellow);
+                    buttonHolder.Background = new SolidColorBrush(Colors.DarkOrange);
+                }
+                else
+                {
+                    displayWinner.Foreground = new SolidColorBrush(Colors.Maroon);
+                    restart.Background = new SolidColorBrush(Colors.Red);
+                    endGame.Background = new SolidColorBrush(Colors.Red);
+                    buttonHolder.Background = new SolidColorBrush(Colors.Maroon);
+                }
             }
 
             DisplayChamp.Margin = new Thickness(10, 50, 10, 50);
@@ -511,6 +524,9 @@ namespace Connect4
             t.FontSize = 30;
             t.HorizontalAlignment = HorizontalAlignment.Center;
 
+            RadioButton1.IsChecked = false;
+            RadioButton2.IsChecked = false;
+            selectedColour.Children.Clear();
             MainPanel.Children.Add(Title);
             MainPanel.Children.Add(t);
             MainPanel.Children.Add(chooseChip);
