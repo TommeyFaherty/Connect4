@@ -1,0 +1,23 @@
+﻿[ResourceMetadata]
+"ResourceDimensions"		"scale-200"
+"ResourceDimensions"		"language-en-us"
+
+[Files]
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\split.pri"			"resources.pri"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\WinMetadata\Windows.winmd"			"WinMetadata\Windows.winmd"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Properties\Default.rd.xml"			"Properties\Default.rd.xml"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Connect4.xr.xml"			"Connect4.xr.xml"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\Wide310x150Logo.scale-200.png"			"Assets\Wide310x150Logo.scale-200.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\StoreLogo.png"			"Assets\StoreLogo.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\Square44x44Logo.scale-200.png"			"Assets\Square44x44Logo.scale-200.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\Square44x44Logo.targetsize-24_altform-unplated.png"			"Assets\Square44x44Logo.targetsize-24_altform-unplated.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\Square150x150Logo.scale-200.png"			"Assets\Square150x150Logo.scale-200.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\SplashScreen.scale-200.png"			"Assets\SplashScreen.scale-200.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\rsz_unnamed.png"			"Assets\rsz_unnamed.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\rsz_1connect4_300x300.png"			"Assets\rsz_1connect4_300x300.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\LockScreenLogo.scale-200.png"			"Assets\LockScreenLogo.scale-200.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\Connect_1240x600.png"			"Assets\Connect_1240x600.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\88x88_rsz_3unnamed.png"			"Assets\88x88_rsz_3unnamed.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\620_300_rsz_connect4.png"			"Assets\620_300_rsz_connect4.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\44x44_unnamed.png"			"Assets\44x44_unnamed.png"
+"C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Release\PackageLayout\Assets\24x24_rsz_unnamed.png"			"Assets\24x24_rsz_unnamed.png"

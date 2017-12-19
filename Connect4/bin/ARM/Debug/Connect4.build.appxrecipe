@@ -8,8 +8,8 @@
     <TargetOsDescription>Windows 10.0</TargetOsDescription>
     <SolutionConfiguration>Debug|ARM</SolutionConfiguration>
     <PackageArchitecture>arm</PackageArchitecture>
-    <PackageIdentityName>a8674abc-47b5-406a-b88a-fe8b4a321073</PackageIdentityName>
-    <PackageIdentityPublisher>CN=Tommey</PackageIdentityPublisher>
+    <PackageIdentityName>ca65a58e-bbad-4478-873f-ad51b3de009e</PackageIdentityName>
+    <PackageIdentityPublisher>CN=DCAC65F7-B225-47B4-BECE-12B6D0BE14DC</PackageIdentityPublisher>
     <IntermediateOutputPath>C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\obj\ARM\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
@@ -367,8 +367,30 @@
     <AppxPackagedFile Include="C:\Users\Tommey\.nuget\packages\System.Xml.XmlSerializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Properties\Default.rd.xml">
-      <PackagePath>Properties\Default.rd.xml</PackagePath>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\24x24_rsz_unnamed.png">
+      <PackagePath>Assets\24x24_rsz_unnamed.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\44x44_unnamed.png">
+      <PackagePath>Assets\44x44_unnamed.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\620_300_rsz_connect4.png">
+      <PackagePath>Assets\620_300_rsz_connect4.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\88x88_rsz_3unnamed.png">
+      <PackagePath>Assets\88x88_rsz_3unnamed.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\Connect_1240x600.png">
+      <PackagePath>Assets\Connect_1240x600.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\rsz_1connect4_300x300.png">
+      <PackagePath>Assets\rsz_1connect4_300x300.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\rsz_unnamed.png">
+      <PackagePath>Assets\rsz_unnamed.png</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\Square44x44Logo.scale-100.png">
+      <PackagePath>Assets\Square44x44Logo.scale-100.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -396,6 +418,9 @@
     <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\Properties\Default.rd.xml">
+      <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\bin\ARM\Debug\Connect4.xr.xml">
       <PackagePath>Connect4.xr.xml</PackagePath>

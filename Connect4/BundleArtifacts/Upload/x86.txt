@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\bin\x86\Release\Upload\Connect4_1.1.3.0_x86.appx
+SymbolPackage=C:\Users\Tommey\Documents\GitHub\Connect4\Connect4\bin\x86\Release\Upload\Connect4_1.1.3.0\Connect4_1.1.3.0_x86.appxsym
